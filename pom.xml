@@ -105,6 +105,7 @@
   </profiles>
 
   <build>
+    <sourceDirectory>src/main/kotlin</sourceDirectory>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -191,10 +192,45 @@
           <artifactId>maven-ear-plugin</artifactId>
           <version>3.2.0</version>
         </plugin>
+        <plugin>
+          <groupId>org.jetbrains.dokka</groupId>
+          <artifactId>dokka-maven-plugin</artifactId>
+          <version>1.4.30</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-maven-plugin</artifactId>
+          <version>1.4.21</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
     <plugins>
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <phase>process-sources</phase>
+            <configuration>
+              <jvmTarget>1.8</jvmTarget>
+              <sourceDirs>
+                <sourceDir>src/main/kotlin</sourceDir>
+              </sourceDirs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>3.0.0-M3</version>
@@ -250,6 +286,51 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.jetbrains.dokka</groupId>
+        <artifactId>dokka-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>dokka</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>none</phase>
+          </execution>
+          <execution>
+            <id>java-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <source>11</source>
+              <target>11</target>
+            </configuration>
+          </execution>
+          <execution>
+            <id>java-test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -291,6 +372,11 @@
         <optional>true</optional>
         <version>1.18.20</version>
       </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib</artifactId>
+        <version>1.4.30</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -318,6 +404,10 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
     </dependency>
   </dependencies>
 
