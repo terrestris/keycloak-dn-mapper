@@ -57,7 +57,9 @@ public class LdapDnMapper extends AbstractLDAPStorageMapper {
       } else {
         group = groups.get(0);
       }
-      user.joinGroup(group);
+      if (!user.isMemberOf(group)) {
+        user.joinGroup(group);
+      }
     }
     RoleModel role = realm.getRole(part);
     if (role == null) {
@@ -65,7 +67,9 @@ public class LdapDnMapper extends AbstractLDAPStorageMapper {
     }
 
     dnPath.forEach(user::setAttribute);
-    user.grantRole(role);
+    if (!user.hasRole(role)) {
+      user.grantRole(role);
+    }
   }
 
   @Override
