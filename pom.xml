@@ -339,7 +339,7 @@
       <dependency>
         <groupId>org.keycloak</groupId>
         <artifactId>keycloak-ldap-federation</artifactId>
-        <version>12.0.4</version>
+        <version>21.0.1</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
