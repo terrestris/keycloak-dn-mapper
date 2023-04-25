@@ -200,7 +200,7 @@
         <plugin>
           <groupId>org.jetbrains.kotlin</groupId>
           <artifactId>kotlin-maven-plugin</artifactId>
-          <version>1.8.20</version>
+          <version>1.8.21</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -375,7 +375,7 @@
       <dependency>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-stdlib</artifactId>
-        <version>1.8.20</version>
+        <version>1.8.21</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
